@@ -2,7 +2,8 @@ import pygame
 
 class Fighter():
     def __init__(self, x, y):
-        self.rect = pygame.Rect((x, y, 80, 120))
+        self.flip = False
+        self.rect = pygame.Rect((x, y, 80, 150))
         self.vel_y = 0
         self.jump = False
         self.attacking = False
@@ -56,6 +57,12 @@ class Fighter():
             self.vel_y = 0
             self.jump = False
             dy = screen_height - 30 - self.rect.bottom
+        
+        #ensure that players face each other
+        if target.rect.centerx > self.rect.centerx:
+            self.flip = False
+        else:
+            self.flip = True
 
         #update player positions
         self.rect.x += dx
@@ -65,7 +72,7 @@ class Fighter():
     def attack(self, surface, target):
 
         self.attacking = True
-        attacking_rect = pygame.Rect(self.rect.centerx, self.rect.y, 2 * self.rect.width, self.rect.height)
+        attacking_rect = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
         
         if attacking_rect.colliderect(target.rect):
             target.health -= 10

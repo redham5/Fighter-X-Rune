@@ -16,6 +16,12 @@ pygame.display.set_caption("Fighter X Rune")
 clock = pygame.time.Clock()
 FPS = 60
 
+#defind colors
+YELLOW = (255, 255, 0)
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)
+
+
 #load Background image
 bg_image = pygame.image.load("assets/images/background/Fighter X Rune Map.png").convert_alpha()
 
@@ -26,12 +32,15 @@ def draw_bg():
 
 #function for health bar
 def draw_health_bar(health, x, y):
-    
+    ratio = health / 100
+    pygame.draw.rect(screen, WHITE, (x - 2, y - 2, 405, 20))
+    pygame.draw.rect(screen, RED, (x, y, 400, 15))
+    pygame.draw.rect(screen, YELLOW, (x, y, 400 * ratio, 15))
 
 
 #create two instances of fighters
-fighter_1 = Fighter(200, 310)
-fighter_2 = Fighter(700, 310)
+fighter_1 = Fighter(200, 420)
+fighter_2 = Fighter(700, 420)
 
 
 #game loop
@@ -42,6 +51,10 @@ while run:
 
     #draw background
     draw_bg()
+
+    #show player health
+    draw_health_bar(fighter_1.health, 20, 20)
+    draw_health_bar(fighter_2.health, 580, 20)
 
     #move player
     fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_2)

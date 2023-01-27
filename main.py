@@ -17,7 +17,7 @@ clock = pygame.time.Clock()
 FPS = 60
 
 #load Background image
-bg_image = pygame.image.load("assets/images/background/background.jpg").convert_alpha()
+bg_image = pygame.image.load("assets/images/background/Fighter X Rune Map.png").convert_alpha()
 
 #function for background image
 def draw_bg():
@@ -40,7 +40,7 @@ while run:
     draw_bg()
 
     #move player
-    fighter_1.move(SCREEN_WIDTH)
+    fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT)
 
 
     #draw fighter

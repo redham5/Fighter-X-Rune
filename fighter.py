@@ -10,6 +10,7 @@ class Fighter():
         self.action = 0 #0:idle #1:run #2:jump #3:attack1 #4:attack2 #5:hit #6:death
         self.frame_index = 0
         self.image = self.animation_list[self.action][self.frame_index]
+        self.update_time = pygame.time.get_ticks()
         self.rect = pygame.Rect((x, y, 80, 150))
         self.vel_y = 0
         self.jump = False
@@ -31,7 +32,7 @@ class Fighter():
     
     def move(self, screen_width, screen_height, surface, target):
         SPEED = 10
-        GRAVITY = 1.5
+        GRAVITY = 2
         dx = 0
         dy = 0
 
@@ -87,6 +88,18 @@ class Fighter():
         self.rect.x += dx
         self.rect.y += dy
 
+        #handel animation update
+    def update(self):
+        animation_cooldown = 100
+        #update image
+        self.image = self.animation_list[self.action][self.frame_index]
+        #check is enough time has passed since the last update
+        if pygame.time.get_ticks() - self.update_time > animation_cooldown:
+            self.frame_index += 1
+            self.update_time = pygame.time.get_ticks()
+        #check if animation finished
+        if self.frame_index >= len(self.animation_list[self.action]):
+            self.frame_index = 0
 
     def attack(self, surface, target):
 

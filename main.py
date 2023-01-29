@@ -23,18 +23,22 @@ WHITE = (255, 255, 255)
 
 #define fighter variables
 SHUGI_SIZE = 162
-SHUGI_DATA = [SHUGI_SIZE]
+SHUGI_SCALE = 4
+SHUGI_OFFSET = [68, 63]
+SHUGI_DATA = [SHUGI_SIZE, SHUGI_SCALE, SHUGI_OFFSET]
 
 TSUGI_SIZE = 250
-TSUDI_DATA = [TSUGI_SIZE]
+TSUGI_SCALE = 3
+TSUGI_OFFSET = [108, 116]
+TSUDI_DATA = [TSUGI_SIZE, TSUGI_SCALE, TSUGI_OFFSET]
 
 
 #load Background image
 bg_image = pygame.image.load("assets/images/background/Fighter X Rune Map.png").convert_alpha()
 
 #load characters
-shagu_sheet = pygame.image.load("assets/images/heros/Shagu/Sprites/warrior.png")
-tsugi_sheet = pygame.image.load("assets/images/heros/Tsugi/Sprites/wizard.png")
+shagu_sheet = pygame.image.load("assets/images/heros/Shagu/Sprites/warrior.png").convert_alpha()
+tsugi_sheet = pygame.image.load("assets/images/heros/Tsugi/Sprites/wizard.png").convert_alpha()
 
 #cgaracters animations steps
 SHAGU_ANIMATION_STEPS = [10, 8, 1, 7, 7, 3, 7]
@@ -54,9 +58,9 @@ def draw_health_bar(health, x, y):
 
 
 #create two instances of fighters
-fighter_1 = Fighter(200, 420, shagu_sheet, SHUGI_DATA, SHAGU_ANIMATION_STEPS)
+fighter_1 = Fighter(200, 420, False, SHUGI_DATA, shagu_sheet, SHAGU_ANIMATION_STEPS)
 
-fighter_2 = Fighter(700, 420, tsugi_sheet, TSUDI_DATA, TSUGI_ANIMATION_STEPS)
+fighter_2 = Fighter(700, 420, True, TSUDI_DATA, tsugi_sheet, TSUGI_ANIMATION_STEPS)
 
 
 #game loop
